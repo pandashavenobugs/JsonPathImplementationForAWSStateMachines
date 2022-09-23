@@ -1,25 +1,27 @@
 {
-  "personID": "123124",
-  "name": "berat",
-  "surName": "Dinckan",
-  "products": [
-    {
-      "category": "realty",
-      "productType": "house",
-      "price": 50000,
-      "country": "Turkiye"
-    },
-    {
-      "category": "vahicle",
-      "productType": "car",
-      "price": 10000,
-      "country": "Turkiye",
-      "color": "RED"
-    },
-    {
-      "category": "technology",
-      "productType": "laptop",
-      "price": 1000
-    }
-  ]
+  "seller": {
+    "personID": "123124",
+    "name": "berat",
+    "surName": "Dinckan",
+    "products": [
+      {
+        "category": "realty",
+        "productType": "house",
+        "price": 50000,
+        "country": "Turkiye"
+      },
+      {
+        "category": "vahicle",
+        "productType": "car",
+        "price": 10000,
+        "country": "Turkiye",
+        "color": "RED"
+      },
+      {
+        "category": "technology",
+        "productType": "laptop",
+        "price": 1000
+      }
+    ]
+  }
 }
