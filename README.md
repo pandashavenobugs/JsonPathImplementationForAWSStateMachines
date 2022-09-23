@@ -47,6 +47,6 @@ In the pass State:
 ```json
 {
   "seller.$": "$.seller",
-  "filteredProducts.$": "$.seller.products[?]"
+  "filteredProducts.$": "$.seller.products[?(@.category == 'vahicle')]"
 }
 ```

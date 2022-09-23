@@ -4,13 +4,17 @@
   "States": {
     "Pass": {
       "Type": "Pass",
-      "Next": "Choice"
+      "Next": "Choice",
+      "Parameters": {
+        "seller.$": "$.seller",
+        "filteredProducts.$": "$.seller.products[?(@.category == 'vahicle')]"
+      }
     },
     "Choice": {
       "Type": "Choice",
       "Choices": [
         {
-          "Variable": "$.data",
+          "Variable": "$.filteredProducts",
           "IsPresent": true,
           "Next": "Success"
         }
