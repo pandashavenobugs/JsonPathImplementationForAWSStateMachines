@@ -40,7 +40,71 @@ At this point, all products are unique so every different category has one data.
 
 # JsonPath Implementation
 
-Finally, we found [an example of filtering the JSON data](https://goessner.net/articles/jsonpath/index.html#e3). According to this website, we can filter arrays by using some symbols. But how ?
+Finally, we found [an example of filtering the JSON data](https://goessner.net/articles/jsonpath/index.html#e3) According to this website, we can filter arrays by using some symbols. We decided to redesigned te state machine.
+
+## Side Note: To make it clear, I kept the state machine as simple as I can.
+
+The state machine :
+
+<!-- ![image foto](./stepfunctions_graph.png) -->
+<p align="center" width="%100">
+    <img width="%40" src="./stepfunctions_graph.png"> 
+</p>
+
+The state machine as json:
+
+```json
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "Pass",
+  "States": {
+    "Pass": {
+      "Type": "Pass",
+      "Next": "Is the product Car ?",
+      "Parameters": {
+        "seller.$": "$.seller",
+        "filteredProducts.$": "$.seller.products[?(@.category == 'vahicle')]"
+      }
+    },
+    "Is the product Car ?": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "And": [
+            {
+              "Variable": "$.filteredProducts",
+              "IsPresent": true
+            },
+            {
+              "Variable": "$.filteredProducts[0].productType",
+              "StringEquals": "car"
+            }
+          ],
+          "Next": "Is the price under 1001"
+        }
+      ],
+      "Default": "Fail"
+    },
+    "Is the price under 1001": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.filteredProducts[0].price",
+          "NumericLessThan": 1001,
+          "Next": "Success"
+        }
+      ],
+      "Default": "Fail"
+    },
+    "Fail": {
+      "Type": "Fail"
+    },
+    "Success": {
+      "Type": "Succeed"
+    }
+  }
+}
+```
 
 In the pass state:
 
@@ -59,4 +123,10 @@ You can think the "?" as a filter statement and "@" represents the every each ob
 const filteredProducts = seller.producs.filter((product) => {
   return product.category == "vahicle";
 });
+```
+
+after filtering the data, the input of the choice called "Is the product Car ?" must be like below:
+
+```json
+
 ```
