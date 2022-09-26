@@ -106,7 +106,7 @@ The state machine as json:
 }
 ```
 
-In the pass state:
+Parameters in the pass state:
 
 ```json
 {
@@ -125,8 +125,77 @@ const filteredProducts = seller.producs.filter((product) => {
 });
 ```
 
-after filtering the data, the input of the choice called "Is the product Car ?" must be like below:
+We can start a new execution on our state machine by using the data that we have. After filtering the data, the step input of the choice called "Is the product Car ?" must be like below:
 
 ```json
-
+{
+  "seller": {
+    "personID": "123124",
+    "name": "berat",
+    "surName": "Dinckan",
+    "products": [
+      {
+        "category": "realty",
+        "productType": "house",
+        "price": 50000,
+        "country": "Turkiye"
+      },
+      {
+        "category": "vahicle",
+        "productType": "car",
+        "price": 10000,
+        "country": "Turkiye",
+        "color": "RED"
+      },
+      {
+        "category": "technology",
+        "productType": "laptop",
+        "price": 1000
+      }
+    ]
+  },
+  "filteredProducts": [
+    {
+      "category": "vahicle",
+      "productType": "car",
+      "price": 10000,
+      "country": "Turkiye",
+      "color": "RED"
+    }
+  ]
+}
 ```
+
+Now we have a new property called "filteredProducts" that contains a filtered array.
+
+## What would happen if there were other conditions?
+
+We can use different if statements in the jsonPath depending on different conditions. For instance:
+
+## let's filter the json data by price
+
+This jsonPath checks if the price property of every object in the products array is less than 1000
+
+```json
+{
+  "seller.$": "$.seller",
+  "filteredProducts.$": "$.seller.products[?(@.price <1000)]"
+}
+```
+
+## Also, we can check if a property persists or not
+
+This jsonPath checks if the color property of every object in the products array persists
+
+```json
+{
+  "seller.$": "$.seller",
+  "filteredProducts.$": "$.seller.products[?(@.color)]"
+}
+```
+
+# Final Thoughts
+
+If you need to filter data on the state machine, you can try JsonPath instead of lambda. It looks way clearer, simpler, and easier to grasp.
+
+Thanks for reading.
