@@ -42,7 +42,7 @@ At this point, all products are unique so every different category has one data.
 
 Finally, we found [an example of filtering the JSON data](https://goessner.net/articles/jsonpath/index.html#e3). According to this website, we can filter arrays by using some symbols. But how ?
 
-In the pass State:
+In the pass state:
 
 ```json
 {
