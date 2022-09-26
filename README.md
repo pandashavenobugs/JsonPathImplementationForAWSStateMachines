@@ -50,3 +50,13 @@ In the pass State:
   "filteredProducts.$": "$.seller.products[?(@.category == 'vahicle')]"
 }
 ```
+
+Did you notice something ? We have "@" and "?" symbols. What do they mean ?
+
+You can think the "?" as a filter statement and "@" represents the every each object in products array. This jsonPath filter section returns us an array. if there is no data macthing,jsonPath filter section returns us an empty array. This filtering system is like the javascript code below:
+
+```js
+const filteredProducts = seller.producs.filter((product) => {
+  return product.category == "vahicle";
+});
+```

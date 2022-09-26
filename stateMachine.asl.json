@@ -1,0 +1,50 @@
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "Pass",
+  "States": {
+    "Pass": {
+      "Type": "Pass",
+      "Next": "Is the product Car ?",
+      "Parameters": {
+        "seller.$": "$.seller",
+        "filteredProducts.$": "$.seller.products[?(@.category == 'vahicle')]"
+      }
+    },
+    "Is the product Car ?": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "And": [
+            {
+              "Variable": "$.filteredProducts",
+              "IsPresent": true
+            },
+            {
+              "Variable": "$.filteredProducts[0].productType",
+              "StringEquals": "car"
+            }
+          ],
+          "Next": "Is the price under 1001"
+        }
+      ],
+      "Default": "Fail"
+    },
+    "Is the price under 1001": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.filteredProducts[0].price",
+          "NumericLessThan": 1001,
+          "Next": "Success"
+        }
+      ],
+      "Default": "Fail"
+    },
+    "Fail": {
+      "Type": "Fail"
+    },
+    "Success": {
+      "Type": "Succeed"
+    }
+  }
+}
