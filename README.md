@@ -199,3 +199,9 @@ This jsonPath checks if the color property of every object in the products array
 If you need to filter data on the state machine, you can try JsonPath instead of lambda. It looks way clearer, simpler, and easier to grasp.
 
 Thanks for reading.
+
+# References
+
+- [AWS Step Functions Overview](https://medium.com/orion-innovation-turkey/aws-step-functions-overview-a0f5f31b719c)
+
+- [JSONPath - XPath for JSON](https://goessner.net/articles/JsonPath/index.html#e3)
